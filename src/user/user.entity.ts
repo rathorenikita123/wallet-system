@@ -1,6 +1,7 @@
 // user entity
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+// import ShortUniqueId from 'short-unique-id';
 
 @Schema()
 export class User extends Document {
@@ -10,7 +11,7 @@ export class User extends Document {
   @Prop()
   last_name: string;
 
-  @Prop()
+  @Prop({ unique: true })
   email: string;
 
   @Prop()
@@ -19,8 +20,11 @@ export class User extends Document {
   @Prop()
   dob: string;
 
-  @Prop()
+  @Prop({ unique: true })
   phone_number: string;
+
+  // @Prop({ default: () => new ShortUniqueId() }) // Set a default value using uuidv4() for user_id
+  // user_id: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
