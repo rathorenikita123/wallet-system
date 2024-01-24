@@ -7,9 +7,7 @@ import { WalletModule } from './wallet/wallet.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://nikitarathore271201:XMurLwzgCXRMBsBV@cluster0.7spti7o.mongodb.net/',
-    ),
+    MongooseModule.forRoot('you-mongodb-uri'),
     UserModule,
     WalletModule,
   ],
