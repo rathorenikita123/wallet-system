@@ -34,6 +34,7 @@ Make sure you have the following software installed on your machine:
 
 2. Install dependencies
 
+  ```bash
   cd your-repo
   npm install
 
@@ -41,6 +42,7 @@ Make sure you have the following software installed on your machine:
 
 1. Create a .env file in the root directory:
 
+  ```bash
   DB_URI='your-mongodb-uri'
 
 2. Update other configuration files if needed (e.g., database connection details, API ports).
@@ -51,8 +53,6 @@ Make sure you have the following software installed on your machine:
   Endpoint: POST /users
 
   Create a new user with the following details:
-
-    json
 
     {
       "first_name": "John",
@@ -68,8 +68,6 @@ Make sure you have the following software installed on your machine:
 
   Create a wallet for an existing user:
 
-    json
-
     {
       "balance": 1000,
       "reference": "initial_fund"
@@ -80,8 +78,6 @@ Make sure you have the following software installed on your machine:
 
   Fund an existing user's wallet:
 
-    json
-
     {
       "amount": 500
     }
@@ -90,8 +86,6 @@ Make sure you have the following software installed on your machine:
   Endpoint: POST /wallets/transfer/:senderWalletId/:receiverWalletId
 
   Transfer funds from one wallet to another:
-
-    json
 
     {
       "amount": 200
