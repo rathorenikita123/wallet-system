@@ -1,4 +1,3 @@
-// user service
 import {
   Injectable,
   NotFoundException,
@@ -7,8 +6,6 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from './user.entity';
-// import ShortUniqueId from 'short-unique-id';
-// import ShortUniqueId from 'short-unique-id';
 
 @Injectable()
 export class UserService {
@@ -26,7 +23,6 @@ export class UserService {
         throw new ConflictException('Email is already in use');
       }
 
-      // Check for unique phone_number
       const existingPhoneUser = await this.userModel.findOne({
         phone_number: user.phone_number,
       });
@@ -34,8 +30,6 @@ export class UserService {
         throw new ConflictException('Phone number is already in use');
       }
 
-      // user.user_id = new ShortUniqueId();
-      // user.user_id = new ShortUniqueId().randomUUID(6);
       const createdUser = new this.userModel(user);
       console.log('user created');
       return await createdUser.save();
