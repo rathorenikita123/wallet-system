@@ -52,6 +52,21 @@ export class WalletController {
     }
   }
 
+  @Post('fund/:userId')
+  async fundWallet(
+    @Param('userId') userId: string,
+    @Body('amount') amount: number,
+  ): Promise<void> {
+    try {
+      await this.walletService.fundWallet(userId, amount);
+    } catch (error) {
+      throw new HttpException(
+        'Internal Server Error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   @Post(':senderWalletId/transfer/:receiverWalletId')
   async transferFunds(
     @Param('senderWalletId') senderWalletId: string,

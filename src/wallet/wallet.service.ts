@@ -18,11 +18,15 @@ export class WalletService {
 
   async createForUser(
     userId: string,
+
     wallet: CreateWalletDto,
   ): Promise<Wallet> {
     try {
       console.log('starting wallet');
+
       const createdWallet = new this.walletModel({ ...wallet, user: userId });
+      // show user name also in response and save it in database also
+
       console.log('wallet created');
       return await createdWallet.save();
     } catch (error) {
@@ -41,6 +45,24 @@ export class WalletService {
     } catch (error) {
       console.error(`Error finding wallet by ID: ${error.message}`);
       throw new Error('An error occurred while finding the wallet.');
+    }
+  }
+
+  async fundWallet(userId: string, amount: number): Promise<Wallet> {
+    try {
+      const wallet = await this.walletModel.findOne({ user: userId }).exec();
+
+      if (!wallet) {
+        throw new NotFoundException('Wallet not found for the user');
+      }
+
+      wallet.balance += amount;
+      wallet.previous_balance = wallet.balance;
+      console.log('wallet.balance', wallet.balance);
+
+      return await wallet.save();
+    } catch (error) {
+      throw new Error(`Error funding wallet: ${error.message}`);
     }
   }
 
@@ -78,26 +100,14 @@ export class WalletService {
 
         receiverWallet.balance += amount;
         receiverWallet.previous_balance = receiverWallet.balance;
-        await receiverWallet.save();
+        console.log('receiverWallet.balance', receiverWallet.balance);
+        return await receiverWallet.save();
       });
     } catch (error) {
       console.error(`Error transferring funds: ${error.message}`);
       throw new Error('An error occurred while transferring funds.');
     } finally {
       session.endSession();
-    }
-  }
-
-  async updateBalance(id: string, newBalance: number): Promise<Wallet> {
-    try {
-      return await this.walletModel.findByIdAndUpdate(
-        id,
-        { balance: newBalance },
-        { new: true },
-      );
-    } catch (error) {
-      console.error(`Error updating wallet balance: ${error.message}`);
-      throw new Error('An error occurred while updating the wallet balance.');
     }
   }
 }

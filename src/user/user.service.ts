@@ -35,6 +35,7 @@ export class UserService {
       }
 
       // user.user_id = new ShortUniqueId();
+      // user.user_id = new ShortUniqueId().randomUUID(6);
       const createdUser = new this.userModel(user);
       console.log('user created');
       return await createdUser.save();
