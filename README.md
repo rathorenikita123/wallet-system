@@ -34,7 +34,6 @@ Make sure you have the following software installed on your machine:
 
 2. Install dependencies
 
-  ```bash
   cd your-repo
   npm install
 
@@ -42,7 +41,6 @@ Make sure you have the following software installed on your machine:
 
 1. Create a .env file in the root directory:
 
-  ```bash
   DB_URI='your-mongodb-uri'
 
 2. Update other configuration files if needed (e.g., database connection details, API ports).
