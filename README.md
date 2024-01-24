@@ -1,73 +1,109 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Node.js P2P Wallet System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A simple Peer-to-Peer (P2P) wallet system built with Node.js using NestJS, TypeScript, and MongoDB.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+  - [Create User](#create-user)
+  - [Create Wallet](#create-wallet)
+  - [Fund Wallet](#fund-wallet)
+  - [Transfer Funds](#transfer-funds)
+- [API Endpoints](#api-endpoints)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Getting Started
 
-```bash
-$ npm install
-```
+### Prerequisites
 
-## Running the app
+Make sure you have the following software installed on your machine:
 
-```bash
-# development
-$ npm run start
+- [Node.js](https://nodejs.org/)
+- [MongoDB](https://www.mongodb.com/try/download/community)
 
-# watch mode
-$ npm run start:dev
+### Installation
 
-# production mode
-$ npm run start:prod
-```
+1. Clone the repository:
 
-## Test
+   ```bash
+   git clone https://github.com/rathorenikita123/wallet-system.git
 
-```bash
-# unit tests
-$ npm run test
+2. Install dependencies
 
-# e2e tests
-$ npm run test:e2e
+  cd your-repo
+  npm install
 
-# test coverage
-$ npm run test:cov
-```
+### Configuration
 
-## Support
+1. Create a .env file in the root directory:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+  DB_URI='your-mongodb-uri'
 
-## Stay in touch
+2. Update other configuration files if needed (e.g., database connection details, API ports).
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Usage
 
-## License
+  Create User
+  Endpoint: POST /users
 
-Nest is [MIT licensed](LICENSE).
+  Create a new user with the following details:
+
+    json
+
+    {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "address": "123 Main St",
+      "dob": "1990-01-01",
+      "phone_number": "123-456-7890"
+    }
+
+  Create Wallet
+  Endpoint: POST /wallets/users/:userId
+
+  Create a wallet for an existing user:
+
+    json
+
+    {
+      "balance": 1000,
+      "reference": "initial_fund"
+    }
+
+  Fund Wallet
+  Endpoint: POST /wallets/fund/:userId
+
+  Fund an existing user's wallet:
+
+    json
+
+    {
+      "amount": 500
+    }
+  
+  Transfer Funds
+  Endpoint: POST /wallets/transfer/:senderWalletId/:receiverWalletId
+
+  Transfer funds from one wallet to another:
+
+    json
+
+    {
+      "amount": 200
+    }
+
+### API Endpoints
+
+ - POST /users: Create a new user.
+ - POST /wallets/users/:userId: Create a wallet for an existing user.
+ - POST /wallets/fund/:userId: Fund an existing user's wallet.
+ - POST /wallets/transfer/:senderWalletId/:receiverWalletId: Transfer funds between wallets.
+ - GET /users/:id: Get details of a user by its ID.
+ - GET /wallets/:id: Get details of a user by its ID.
+
+
