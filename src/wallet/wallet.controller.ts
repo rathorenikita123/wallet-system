@@ -11,7 +11,7 @@ import {
 import { WalletService } from './wallet.service';
 import { TransferFundsDto } from '../utils/transferFundDTO';
 import { Wallet } from './wallet.entity';
-import { CreateWalletDto } from 'src/utils/validation';
+import { CreateWalletDto } from 'src/utils/createWalletDTO';
 
 @Controller('wallets')
 export class WalletController {

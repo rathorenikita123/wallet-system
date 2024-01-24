@@ -1,4 +1,3 @@
-// wallet.service.ts
 import {
   Injectable,
   NotFoundException,
@@ -22,10 +21,7 @@ export class WalletService {
     wallet: CreateWalletDto,
   ): Promise<Wallet> {
     try {
-      console.log('starting wallet');
-
       const createdWallet = new this.walletModel({ ...wallet, user: userId });
-      // show user name also in response and save it in database also
 
       console.log('wallet created');
       return await createdWallet.save();
@@ -101,6 +97,7 @@ export class WalletService {
         receiverWallet.balance += amount;
         receiverWallet.previous_balance = receiverWallet.balance;
         console.log('receiverWallet.balance', receiverWallet.balance);
+        console.log('senderWallet.balance', senderWallet.balance);
         return await receiverWallet.save();
       });
     } catch (error) {
