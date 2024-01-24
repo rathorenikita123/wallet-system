@@ -9,7 +9,7 @@ import {
   Get,
 } from '@nestjs/common';
 import { WalletService } from './wallet.service';
-import { TransferFundsDto } from '../utils/amountValidation';
+import { TransferFundsDto } from '../utils/transferFundDTO';
 import { Wallet } from './wallet.entity';
 import { CreateWalletDto } from 'src/utils/validation';
 
